@@ -24,9 +24,17 @@ mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
 });
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+  methods: "GET, HEAD, POST",
+  preflightContinue: false,
+  optionSuccessStatus: 204,
+  credentials: true,
+};
+
 //middlewares
-app.use(cors())
-app.use(cookieParser())
+app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/auth", authRoute);
